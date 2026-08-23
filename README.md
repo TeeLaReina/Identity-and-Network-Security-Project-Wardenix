@@ -214,7 +214,7 @@ Recurring oversight layer - access reviews, entitlement management, terms of use
 
 #### Phase 10 - Log Pipeline & Multi-Engine Analysis
 
-![Wardenix Security Operations dashboard — 8 panels across all detection layers](docs/screenshots/phase-10-grafana-dashboard-full.png)
+![Wardenix Security Operations dashboard - 8 panels across all detection layers](docs/screenshots/phase-10-grafana-dashboard-full.png)
 
 Three detection engines were unified into wardenix-sentinel Log Analytics workspace - Entra ID, Wazuh, and Defender XDR all queryable via KQL and visualized in Grafana.
 
@@ -226,7 +226,51 @@ Three detection engines were unified into wardenix-sentinel Log Analytics worksp
 - KQL detection queries: impossible travel, PIM activation anomalies, stale access, mass consent grants, Wazuh alert triage
 - Real detections in pipeline: SSH brute force (rule 5710, level 5), memory pressure (rule 5108, level 12)
 
-- [ ] **Phase 11 - SOAR + AI-Assisted Response:** automated playbook, incident narrative
+- [x] **Phase 11 - SOAR + AI-Assisted Response:** automated playbook, incident narrative
+
+#### Phase 11 - SOAR + AI-Assisted Response
+
+![Wardenix Risky Sign-in Response - complete 8-node workflow canvas](docs/screenshots/phase-11-final-canvas-complete.png)
+
+Built and validated a fully automated incident response playbook triggered by Identity Protection risk events. A risky sign-in fires a webhook, Gemini AI triages it, and the response chain executes without human input: user marked compromised in Entra, attacker IP blocked at the firewall, analyst alerted in Slack, incident logged in GitHub.
+
+**Workflow: Wardenix Risky Sign-in Response (8 nodes)**
+
+| Node | Action | Result |
+|---|---|---|
+| Sentinel_Risky_Signin | Webhook trigger - receives sign-in risk payload | Entry point for all detections |
+| Parse_Signin_Data | Extracts 7 fields from the payload | `$parse_signin_data` available downstream |
+| Gemini | POST to `gemini-3.5-flash` - AI triage | `severity`, `reason`, `action` returned as JSON |
+| Parse_Gemini | Python parser - extracts clean triage output | Handles edge cases, thoughtSignature stripped |
+| Get_Graph_Token | Client credentials token from Entra (OAuth2) | Bearer token for Graph API calls |
+| Confirm_Compromised | `POST /identityProtection/riskyUsers/confirmCompromised` | HTTP 204 - user flagged in Entra ID |
+| Block_IP_via_UFW | SSH to management droplet — `ufw deny from <ip> to any` | IP blocked at perimeter firewall |
+| Slack_Alert | POST to `#wardenix-alerts` with structured AI triage | HTTP 200 — analysts notified |
+| GitHub_Issue | POST to `TeeLaReina/Wardenix/issues` — IR ticket created | HTTP 201 — evidence trail logged |
+
+**Infrastructure fixes required during build:**
+
+- Docker Swarm was inactive - `shuffle_swarm_executions` overlay network missing; Orborus worker dispatch was timing out on all nodes. Fixed: `docker swarm init` + `docker network create --driver overlay --attachable shuffle_swarm_executions`
+- Gemini free tier limit: 20 requests/day per model. `gemini-3.5-flash` is the working model for new API keys (2.0/2.5 series unavailable to new keys)
+- Parse_Gemini Python script required to strip `thoughtSignature` blob from Gemini response before passing triage output downstream
+- UFW was inactive on the management droplet - enabled after confirming OpenSSH rule in place to prevent lockout
+- Client credentials flow (wardenix-grafana app registration): `~` in client secret corrupted by shell expansion; fixed with `--data-urlencode` in curl and `%7E` encoding in Shuffle body field
+- Gemini node condition branch uses `$gemini.body` as source for routing (`contains "Confirm Compromised"` vs `contains "Monitor Only"`)
+
+**App registration permissions (wardenix-grafana):**
+- `IdentityRiskyUser.ReadWrite.All` - confirm compromised
+- `Directory.ReadWrite.All` - revoke sessions
+- `User.ReadWrite.All` - user management
+
+**Artifacts:**
+
+![Entra ID - Wale Ibrahim confirmed compromised by wardenix-grafana](docs/screenshots/phase-11-entra-risky-user-confirmed-compromised.png)
+![Slack #wardenix-alerts - structured AI triage alert](docs/screenshots/phase-11-slack-alert-ai-triage-clean.png)
+![GitHub Issue #22 - clean incident report with AI triage](docs/screenshots/phase-11-github-issue-22-clean-output.png)
+![UFW rule active - 185.220.101.45 DENY IN](docs/screenshots/phase-11-ufw-block-rule-active.png)
+
+- IR runbook committed: docs/ir-runbook.md - 5-phase response procedure (Detect, Contain, Investigate, Remediate, Document)
+- Crisis communication template committed: docs/crisis-comms-template.md - internal, management, and post-incident communication templates
 
 ## Getting started
 
