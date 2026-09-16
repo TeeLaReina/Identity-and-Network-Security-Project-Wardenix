@@ -20,3 +20,4 @@ active for the free-tier 20 users who have no CA entitlement.
 
 ## Evidence
 Screenshot: docs/screenshots/phase-5-security-defaults-enabled.png
+![docs/screenshots/phase-5-security-defaults-enabled.png](../docs/screenshots/phase-5-security-defaults-enabled.png)
