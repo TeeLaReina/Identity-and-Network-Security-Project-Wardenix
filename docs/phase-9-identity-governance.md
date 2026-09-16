@@ -72,7 +72,12 @@ Tracking: score to be compared at each phase boundary as hardening improves post
 
 ## Evidence
 - docs/screenshots/phase-9-access-review-created.png
+![docs/screenshots/phase-9-access-review-created.png](../docs/screenshots/phase-9-access-review-created.png)
 - docs/screenshots/phase-9-hr-access-review-created.png
+![docs/screenshots/phase-9-hr-access-review-created.png](../docs/screenshots/phase-9-hr-access-review-created.png)
 - docs/screenshots/phase-9-access-package-created.png
+![docs/screenshots/phase-9-access-package-created.png](../docs/screenshots/phase-9-access-package-created.png)
 - docs/screenshots/phase-9-terms-of-use-created.png
+![docs/screenshots/phase-9-terms-of-use-created.png](../docs/screenshots/phase-9-terms-of-use-created.png)
 - docs/screenshots/phase-9-identity-secure-score-baseline.png
+![docs/screenshots/phase-9-identity-secure-score-baseline.png](../docs/screenshots/phase-9-identity-secure-score-baseline.png)
