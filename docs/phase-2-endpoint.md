@@ -20,3 +20,4 @@ verified network boundaries, and registered to Entra ID.
 
 ## Evidence
 - docs/screenshots/phase-2-entra-device-joined.png
+![docs/screenshots/phase-2-entra-device-joined.png](../docs/screenshots/phase-2-entra-device-joined.png)
