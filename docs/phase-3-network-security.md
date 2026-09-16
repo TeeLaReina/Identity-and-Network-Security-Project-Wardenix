@@ -48,4 +48,6 @@ and response platform everything in Phase 4 reports into.
 
 ## Evidence
 - docs/screenshots/phase-3-wale-win10-endpoint-on-wazuh.png
+![docs/screenshots/phase-3-wale-win10-endpoint-on-wazuh.png](../docs/screenshots/phase-3-wale-win10-endpoint-on-wazuh.png)
 - docs/screenshots/phase-3-radius-wireshark-capture.png
+![docs/screenshots/phase-3-wale-win10-endpoint-on-wazuh.png](../docs/screenshots/phase-3-wale-win10-endpoint-on-wazuh.png)
