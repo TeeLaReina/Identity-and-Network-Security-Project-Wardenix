@@ -26,3 +26,4 @@ or credentials. Runs on every push to main.
 
 ## Evidence
 - docs/screenshots/phase-1-users-provisioned.png
+![docs/screenshots/phase-1-users-provisioned.png](../docs/screenshots/phase-1-users-provisioned.png)
