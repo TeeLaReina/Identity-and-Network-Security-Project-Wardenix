@@ -89,10 +89,18 @@ Entra ID diagnostic setting `wardenix-entra-to-sentinel` streams to wardenix-sen
 
 ## Evidence
 - docs/screenshots/phase-6-ca-policies-all-enabled.png
+![docs/screenshots/phase-6-ca-policies-all-enabled.png](../docs/screenshots/phase-6-ca-policies-all-enabled.png)
 - docs/screenshots/phase-6-kql-ca-policies-firing.png
+![docs/screenshots/phase-6-kql-ca-policies-firing.png](../docs/screenshots/phase-6-kql-ca-policies-firing.png)  
 - docs/screenshots/phase-6-kql-mfa-enforcement-rate.png
+![docs/screenshots/phase-6-kql-mfa-enforcement-rate.png](../docs/screenshots/phase-6-kql-mfa-enforcement-rate.png)
 - docs/screenshots/phase-6-grafana-azure-monitor-connected.png
+![docs/screenshots/phase-6-grafana-azure-monitor-connected.png](../docs/screenshots/phase-6-grafana-azure-monitor-connected.png)
 - docs/screenshots/phase-6-grafana-dashboard-full.png
+![docs/screenshots/phase-6-grafana-dashboard-full.png](../docs/screenshots/phase-6-grafana-dashboard-full.png)
 - docs/screenshots/phase-6-grafana-mfa-panel.png
+![docs/screenshots/phase-6-grafana-mfa-panel.png](../docs/screenshots/phase-6-grafana-mfa-panel.png)
 - docs/screenshots/phase-6-grafana-ca-status-panel.png
+![docs/screenshots/phase-6-grafana-ca-status-panel.png](../docs/screenshots/phase-6-grafana-ca-status-panel.png)
 - docs/screenshots/phase-6-grafana-pim-panel.png
+![docs/screenshots/phase-6-grafana-pim-panel.png](../docs/screenshots/phase-6-grafana-pim-panel.png)
