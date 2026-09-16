@@ -120,11 +120,20 @@ automatically via the diagnostic settings pipeline.
 
 ## Evidence
 - docs/screenshots/phase-10-sentinel-deployed.png
+![docs/screenshots/phase-10-sentinel-deployed.png](../docs/screenshots/phase-10-sentinel-deployed.png)
 - docs/screenshots/phase-10-kql-signin-pipeline-volume.png
+![docs/screenshots/phase-10-kql-signin-pipeline-volume.png](../docs/screenshots/phase-10-kql-signin-pipeline-volume.png)
 - docs/screenshots/phase-10-kql-impossible-travel.png
+![docs/screenshots/phase-10-kql-impossible-travel.png](../docs/screenshots/phase-10-kql-impossible-travel.png)
 - docs/screenshots/phase-10-kql-pim-activation-anomalies.png
+![docs/screenshots/phase-10-kql-pim-activation-anomalies.png](../docs/screenshots/phase-10-kql-pim-activation-anomalies.png)
 - docs/screenshots/phase-10-kql-stale-access.png
+![docs/screenshots/phase-10-kql-stale-access.png](../docs/screenshots/phase-10-kql-stale-access.png)
 - docs/screenshots/phase-10-kql-consent-grants.png
+![docs/screenshots/phase-10-kql-consent-grants.png](../docs/screenshots/phase-10-kql-consent-grants.png)
 - docs/screenshots/phase-10-wazuh-sentinel-forwarder-output.png
+![docs/screenshots/phase-10-wazuh-sentinel-forwarder-output.png](../docs/screenshots/phase-10-wazuh-sentinel-forwarder-output.png)
 - docs/screenshots/phase-10-grafana-wazuh-alerts-panel.png
+![docs/screenshots/phase-10-grafana-wazuh-alerts-panel.png](../docs/screenshots/phase-10-grafana-wazuh-alerts-panel.png)
 - docs/screenshots/phase-10-grafana-dashboard-full.png
+![docs/screenshots/phase-10-grafana-dashboard-full.png](../docs/screenshots/phase-10-grafana-dashboard-full.png)
