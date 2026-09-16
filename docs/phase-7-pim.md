@@ -2,7 +2,7 @@
 
 ## Overview
 I gave just-in-time privileged access to the two IT Admin accounts. No standing admin
-privileges meaning roles must be explicitly activated, MFA-verified, justified, and
+privileges, meaning roles must be explicitly activated, MFA-verified, justified, and
 approved before becoming active. Roles auto-expire after 1 hour.
 
 ## Eligible assignments
@@ -32,6 +32,10 @@ and will be re-enabled after Phase 7 commit.
 
 ## Evidence
 - docs/screenshots/phase-7-pim-eligible-assignments.png
+![docs/screenshots/phase-7-pim-eligible-assignments.png](../docs/screenshots/phase-7-pim-eligible-assignments.png)
 - docs/screenshots/phase-7-pim-approval-request-mei.png
+![docs/screenshots/phase-7-pim-approval-request-mei.png](../docs/screenshots/phase-7-pim-approval-request-mei.png)
 - docs/screenshots/phase-7-pim-wale-role-activated.png
+![docs/screenshots/phase-7-pim-wale-role-activated.png](../docs/screenshots/phase-7-pim-wale-role-activated.png)
 - docs/screenshots/phase-7-ca06-device-policy-blocking-non-joined-device.png
+![docs/screenshots/phase-7-ca06-device-policy-blocking-non-joined-device.png](../docs/screenshots/phase-7-ca06-device-policy-blocking-non-joined-device.png)
