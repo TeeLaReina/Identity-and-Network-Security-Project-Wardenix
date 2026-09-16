@@ -39,7 +39,12 @@ Attack before harden - always.
 
 ## Evidence
 - docs/screenshots/phase-4-tee-meterpreter-sysinfo-getsystem-hashdump.png
+![phase-4-tee-meterpreter-sysinfo-getsystem-hashdump.png](../docs/screenshots/phase-4-tee-meterpreter-sysinfo-getsystem-hashdump.png)
 - docs/screenshots/phase-4-tee-bypassuac-fodhelper-already-elevated.png
+![docs/screenshots/phase-4-tee-bypassuac-fodhelper-already-elevated.png](../docs/screenshots/phase-4-tee-bypassuac-fodhelper-already-elevated.png)
 - docs/screenshots/phase-4-wale-bypassuac-fodhelper-not-in-admins.png
+![docs/screenshots/phase-4-wale-bypassuac-fodhelper-not-in-admins.png](../docs/screenshots/phase-4-wale-bypassuac-fodhelper-not-in-admins.png)
 - docs/screenshots/phase-4-wale-getsystem-failed-exploit-suggester.png
+![docs/screenshots/phase-4-wale-getsystem-failed-exploit-suggester.png](../docs/screenshots/phase-4-wale-getsystem-failed-exploit-suggester.png)
 - docs/screenshots/phase-4-tee-posthardening-getsystem-hashdump-failed.png
+![docs/screenshots/phase-4-tee-posthardening-getsystem-hashdump-failed.png](../docs/screenshots/phase-4-tee-posthardening-getsystem-hashdump-failed.png)
