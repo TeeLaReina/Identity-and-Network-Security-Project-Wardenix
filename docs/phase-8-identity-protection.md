@@ -95,8 +95,14 @@ Finding: 12 risk events captured from Tor browser session 2 (18 Aug 2026)
 
 ## Evidence
 - docs/screenshots/phase-8-risk-detections-tor.png
+![docs/screenshots/phase-8-risk-detections-tor.png](../docs/screenshots/phase-8-risk-detections-tor.png)
 - docs/screenshots/phase-8-risky-sign-in-details-tor.png
+![docs/screenshots/phase-8-risky-sign-in-details-tor.png](../docs/screenshots/phase-8-risky-sign-in-details-tor.png)
 - docs/screenshots/phase-8-risky-user-wale.png
+![docs/screenshots/phase-8-risky-user-wale.png](../docs/screenshots/phase-8-risky-user-wale.png)
 - docs/screenshots/phase-8-wale-confirmed-safe.png
+![docs/screenshots/phase-8-wale-confirmed-safe.png](../docs/screenshots/phase-8-wale-confirmed-safe.png)
 - docs/screenshots/phase-8-ca07-user-risk-policy.png
+![docs/screenshots/phase-8-ca07-user-risk-policy.png](../docs/screenshots/phase-8-ca07-user-risk-policy.png)
 - docs/screenshots/phase-8-grafana-risk-events-panel.png
+![docs/screenshots/phase-8-grafana-risk-events-panel.png](../docs/screenshots/phase-8-grafana-risk-events-panel.png)
