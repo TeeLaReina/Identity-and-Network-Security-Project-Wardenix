@@ -1,9 +1,9 @@
-# Phase 11 — SOAR + AI-Assisted Response (Capstone)
+# Phase 11 - SOAR + AI-Assisted Response (Capstone)
 
 ## Overview
 
 8-node Shuffle SOAR workflow that automatically responds to high-risk Entra ID
-sign-in events — confirmed compromised in Entra, blocked at the network perimeter,
+sign-in events - confirmed compromised in Entra, blocked at the network perimeter,
 notified via Slack with structured AI triage, and logged as a GitHub issue.
 Built and validated through 21 iterations over 19-21 August 2026.
 
@@ -72,7 +72,7 @@ End-to-end execution time: approximately 20 seconds
 
 ## Problems solved (21 iterations)
 
-### Problem 1 — Docker Swarm inactive
+### Problem 1 - Docker Swarm inactive
 **Symptom:** Executions stuck in EXECUTING indefinitely. Orborus reported
 `shuffle_swarm_executions network not found`.
 
@@ -83,8 +83,8 @@ docker network create --driver overlay --attachable shuffle_swarm_executions
 docker restart shuffle-orborus
 ```
 
-### Problem 2 — Gemini model unavailability
-**Symptom:** gemini-2.0-flash and gemini-2.5-flash returned 404 — unavailable
+### Problem 2 - Gemini model unavailability
+**Symptom:** gemini-2.0-flash and gemini-2.5-flash returned 404 - unavailable
 to API keys created after a certain date.
 
 **Discovery:** Queried the models endpoint to find available models:
@@ -94,13 +94,13 @@ curl -s "https://generativelanguage.googleapis.com/v1beta/models?key=KEY" | grep
 
 **Fix:** Switched to gemini-3.5-flash.
 
-### Problem 3 — Gemini 503 / ReadTimeout
+### Problem 3 - Gemini 503 / ReadTimeout
 **Symptom:** gemini-3.7-flash caused ReadTimeout due to thinking architecture.
 
 **Fix:** Added `"generationConfig":{"thinkingConfig":{"thinkingBudget":0}}` to
 disable thinking mode. Set HTTP node timeout to 60 seconds.
 
-### Problem 4 — thoughtSignature blob in output
+### Problem 4 - thoughtSignature blob in output
 **Symptom:** Raw Gemini response included massive base64 thoughtSignature making
 Slack alerts and GitHub issues unreadable.
 
@@ -110,16 +110,16 @@ severity/reason/action JSON. Falls back gracefully on any parse failure:
 {"severity": "System Error", "action": "Manual Analyst Review Required", "reason": "Failed to parse AI response"}
 ```
 
-### Problem 5 — Shell tilde expansion corrupting client secret
+### Problem 5 - Shell tilde expansion corrupting client secret
 **Symptom:** Client secret contained a `~` character. Shell expanded it as
 home directory path, corrupting the secret before it was sent. curl returned
 empty output with no error.
 
 **Fix:** URL-encoded `~` as `%7E` in the Shuffle node body field.
 
-### Problem 6 — Invalid userId format
+### Problem 6 - Invalid userId format
 **Symptom:** Confirm_Compromised returned 400 BadRequest "Invalid id format."
-Test payload used placeholder `"test-user-id-001"` — not a real Entra UUID.
+Test payload used placeholder `"test-user-id-001"` - not a real Entra UUID.
 
 **Fix:** Retrieved Wale Ibrahim's real object ID via Graph API:
 ```bash
@@ -128,24 +128,24 @@ curl -H "Authorization: Bearer $TOKEN" \
 ```
 Result: `a456d583-2cae-4b60-8741-cb5bed854dbd`
 
-### Problem 7 — Startnode reassignment
+### Problem 7 - Startnode reassignment
 **Symptom:** After canvas edits, Shuffle reassigned startnode away from webhook
 trigger. All non-trigger nodes showed SKIPPED with "not under the startnode".
 
 **Fix:** Re-clicked webhook trigger to confirm as startnode, re-saved workflow.
 
-### Problem 8 — Condition branch mismatch
-**Symptom:** Both branches skipping — "Minimum of one branch's conditions must
+### Problem 8 - Condition branch mismatch
+**Symptom:** Both branches skipping - "Minimum of one branch's conditions must
 be correct to continue. Total: 0 of 1".
 
 **Root cause 1:** Condition source path referenced old node name after rename.
 **Fix:** Updated condition to reference `$gemini.body`.
 
-**Root cause 2:** Accidental second connection to Get_Graph_Token — reported
+**Root cause 2:** Accidental second connection to Get_Graph_Token - reported
 "Skipping due to unfinished parents (1/2)".
 **Fix:** Deleted the extra connection.
 
-### Problem 9 — SSH key format incompatibility
+### Problem 9 - SSH key format incompatibility
 **Symptom:** Standard ED25519 OPENSSH key rejected by Shuffle's Paramiko:
 `SSHException - unpack requires a buffer of 4 bytes`
 
@@ -155,14 +155,14 @@ ssh-keygen -t rsa -b 2048 -m PEM -N '' -f ~/.ssh/wardenix_soar_rsa
 ```
 Public key appended to `/root/.ssh/authorized_keys` on the droplet.
 
-### Problem 10 — UFW command syntax error
+### Problem 10 - UFW command syntax error
 **Symptom:** `ufw insert 1 deny from <IP> to any` returned
 "ERROR: Invalid position '1'"
 
 **Fix:** `ufw deny from <IP> to any`
-(UFW adds deny rules before allow rules by default — explicit position unnecessary)
+(UFW adds deny rules before allow rules by default - explicit position unnecessary)
 
-### Problem 11 — UFW inactive
+### Problem 11 - UFW inactive
 **Symptom:** Rules were being added but not enforced. `ufw status: inactive`.
 
 **Fix:**
@@ -171,20 +171,20 @@ ufw allow OpenSSH
 ufw --force enable
 ```
 
-### Problem 12 — Wrong webhook URL in Slack_Alert
+### Problem 12 - Wrong webhook URL in Slack_Alert
 **Symptom:** Slack_Alert node POSTing to the Shuffle webhook URL instead of
-Slack — recursive trigger. The Slack message body appeared as the next payload.
+Slack - recursive trigger. The Slack message body appeared as the next payload.
 
 **Fix:** Corrected URL to `https://hooks.slack.com/services/T0BR115H0V9/...`
 
-### Problem 13 — Gemini free tier quota exhausted
-**Symptom:** 429 RESOURCE_EXHAUSTED — `quotaId: GenerateRequestsPerDayPerProjectPerModel-FreeTier`,
+### Problem 13 - Gemini free tier quota exhausted
+**Symptom:** 429 RESOURCE_EXHAUSTED - `quotaId: GenerateRequestsPerDayPerProjectPerModel-FreeTier`,
 quota: 20 requests/day.
 
 **Handling:** Parse_Gemini fallback outputs structured error object. Workflow
-continues through all remaining nodes — user still confirmed compromised, IP
+continues through all remaining nodes - user still confirmed compromised, IP
 blocked, Slack alerted, GitHub issue created. Triage field shows
-"System Error — Manual Analyst Review Required".
+"System Error - Manual Analyst Review Required".
 
 ---
 
@@ -211,7 +211,7 @@ blocked, Slack alerted, GitHub issue created. Triage field shows
 
 **Identity containment before network isolation:** Confirm_Compromised runs before
 Block_IP_via_UFW. Entra risk confirmation triggers CA policies across all cloud
-resources immediately — broader and faster than a single firewall rule. The UFW
+resources immediately - broader and faster than a single firewall rule. The UFW
 block is a secondary layer preventing further connection attempts at the perimeter.
 
 **Dedicated automation SSH key:** wardenix_soar_rsa (RSA 2048 PEM, no passphrase)
@@ -220,11 +220,11 @@ Follows principle of least privilege for automation credentials.
 
 **Graceful degradation on Gemini failure:** Parse_Gemini Python script catches all
 exceptions and returns a structured fallback. Gemini outage, quota exhaustion, or
-parsing failure does not stop the workflow — user still confirmed compromised, IP
+parsing failure does not stop the workflow - user still confirmed compromised, IP
 blocked, Slack alerted, GitHub issue created.
 
 **Idempotent UFW rules:** UFW returns "Skipping adding existing rule" when deny
-rule already exists. Workflow treats this as success — no errors on re-trigger
+rule already exists. Workflow treats this as success - no errors on re-trigger
 for the same IP.
 
 **Microsoft Entra P2 licence note:** The confirmCompromised Graph API endpoint
@@ -262,15 +262,26 @@ whose risk state the workflow manages.
 
 ### Primary artifacts
 - docs/screenshots/phase-11-final-canvas-complete.png
+![docs/screenshots/phase-11-final-canvas-complete.png](../docs/screenshots/phase-11-final-canvas-complete.png)
 - docs/screenshots/phase-11-full-pipeline-execution.png
+![docs/screenshots/phase-11-full-pipeline-execution.png](../docs/screenshots/phase-11-full-pipeline-execution.png)
 - docs/screenshots/phase-11-entra-risky-user-confirmed-compromised.png
+![docs/screenshots/phase-11-entra-risky-user-confirmed-compromised.png](../docs/screenshots/phase-11-entra-risky-user-confirmed-compromised.png)
 - docs/screenshots/phase-11-ufw-block-rule-active.png
+![docs/screenshots/phase-11-ufw-block-rule-active.png](../docs/screenshots/phase-11-ufw-block-rule-active.png)
 - docs/screenshots/phase-11-slack-alert-ai-triage-clean.png
+![docs/screenshots/phase-11-slack-alert-ai-triage-clean.png](../docs/screenshots/phase-11-slack-alert-ai-triage-clean.png)
 - docs/screenshots/phase-11-github-issue-22-clean-output.png
+![docs/screenshots/phase-11-github-issue-22-clean-output.png](../docs/screenshots/phase-11-github-issue-22-clean-output.png)
 
 ### Progress artifacts
 - docs/screenshots/phase-11-shuffle-workflow-canvas.png
+![docs/screenshots/phase-11-shuffle-workflow-canvas.png](../docs/screenshots/phase-11-shuffle-workflow-canvas.png)
 - docs/screenshots/phase-11-entra-risky-users-list.png
+![docs/screenshots/phase-11-entra-risky-users-list.png](../docs/screenshots/phase-11-entra-risky-users-list.png)
 - docs/screenshots/phase-11-github-issue-ai-triage-unformatted-v1.png
+![docs/screenshots/phase-11-github-issue-ai-triage-unformatted-v1.png](../docs/screenshots/phase-11-github-issue-ai-triage-unformatted-v1.png)
 - docs/screenshots/phase-11-slack-alert-fired.png
+![docs/screenshots/phase-11-slack-alert-fired.png](../docs/screenshots/phase-11-slack-alert-fired.png)
 - docs/screenshots/phase-11-slack-test-message.png
+![docs/screenshots/phase-11-slack-test-message.png](../docs/screenshots/phase-11-slack-test-message.png)
